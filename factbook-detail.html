@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Factbook Automation — Case Study | Mustafa Nalbantli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F6F3EC; --ink: #1E1B16; --muted: #625C50; --line: #DCD5C4;
+    --navy: #1F3A5F; --clay: #A65A3B; --clay-dark: #8A4A2F; --gold: #C99A3E;
+    --card: #FBF9F4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: 'IBM Plex Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(246,243,236,0.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; max-width: 820px; }
+  .back-link { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--muted); }
+  .back-link:hover { color: var(--ink); }
+  .nav-ctas { display: flex; gap: 10px; }
+  .btn { font-family: 'IBM Plex Sans', sans-serif; font-size: 13.5px; font-weight: 600; padding: 9px 16px; border-radius: 3px; cursor: pointer; white-space: nowrap; transition: transform .12s; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--clay); color: #fff; }
+  .btn-secondary { background: transparent; border: 1px solid var(--line); }
+  @media (max-width: 560px) { .nav-ctas .btn-secondary { display: none; } }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); margin-bottom: 18px; }
+  h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 38px; line-height: 1.12; max-width: 680px; margin-bottom: 16px; }
+  .hero-result { font-size: 16px; font-weight: 600; color: var(--clay-dark); margin-bottom: 14px; }
+  .hero-sub { font-size: 15.5px; color: var(--muted); max-width: 580px; line-height: 1.65; }
+  .hero { padding: 48px 0 8px; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+  .tags span { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; border-radius: 3px; }
+
+  .stat-band { margin-top: 36px; background: var(--ink); border-radius: 6px; display: flex; flex-wrap: wrap; }
+  .stat-tile { flex: 1; min-width: 130px; padding: 20px 18px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .stat-tile:last-child { border-right: none; }
+  .stat-tile .v { font-family: 'JetBrains Mono', monospace; font-size: 20px; color: var(--gold); font-weight: 500; }
+  .stat-tile .k { font-size: 11px; color: #B8AF9E; margin-top: 6px; line-height: 1.4; }
+
+  section.block { padding: 44px 0; border-bottom: 1px solid var(--line); }
+  section.block:last-of-type { border-bottom: none; }
+  .block h2 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+  .block p { font-size: 14.5px; color: var(--muted); line-height: 1.72; max-width: 640px; margin-bottom: 14px; }
+  .block p:last-child { margin-bottom: 0; }
+  .block p strong { color: var(--ink); font-weight: 600; }
+
+  .bug-card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; margin-bottom: 10px; }
+  .bug-card .b-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--clay-dark); margin-bottom: 6px; display: block; }
+  .bug-card h4 { font-size: 14.5px; font-weight: 600; margin-bottom: 5px; }
+  .bug-card p { font-size: 13.5px; margin: 0; }
+
+  table.validate { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13.5px; }
+  table.validate th, table.validate td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+  table.validate th { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  table.validate td:last-child, table.validate th:last-child { font-family: 'JetBrains Mono', monospace; }
+  table.validate tr:last-child td { border-bottom: none; }
+
+  .limits-list li { font-size: 13.5px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; list-style: none; padding-left: 18px; position: relative; }
+  .limits-list li::before { content: '—'; position: absolute; left: 0; color: var(--navy); }
+
+  .collab-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .collab { display: flex; gap: 14px; align-items: baseline; }
+  .collab .name { font-weight: 600; font-size: 14px; min-width: 150px; }
+  .collab .role { font-size: 13px; color: var(--muted); }
+
+  .tool-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tool-grid span { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: var(--card); border: 1px solid var(--line); padding: 5px 10px; border-radius: 3px; }
+
+  footer { padding: 56px 0 80px; text-align: center; }
+  footer h3 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 10px; }
+  footer p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+  footer .foot-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 27px; }
+    .stat-band { flex-direction: column; }
+    .stat-tile { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    table.validate { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="back-link" href="index.html">← All case studies</a>
+    <div class="nav-ctas">
+      <a class="btn btn-secondary" href="#resume">Download Resume</a>
+      <a class="btn btn-primary mailto-link" href="#">Let's Talk</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Case Study · Automation & Reporting — OPEIR, University of Tennessee at Chattanooga</div>
+    <h1>Factbook Automation</h1>
+    <div class="hero-result">Replaced a fully manual, semester-by-semester Excel process with a validated Alteryx → Power BI → Streamlit pipeline — after two earlier tool choices didn't hold up for non-technical staff.</div>
+    <p class="hero-sub">Rebuilt UTC's entire institutional Factbook reporting pipeline — enrollment, demographics, residency, athletics, retention, and graduation reporting across every UTC college — and handed the finished tooling off to non-technical OPEIR staff as their standing workflow.</p>
+    <div class="tags">
+      <span>Alteryx Designer</span><span>Power BI</span><span>DAX</span><span>Python</span><span>Plotly</span><span>Streamlit</span>
+    </div>
+
+    <div class="stat-band">
+      <div class="stat-tile"><div class="v">10+</div><div class="k">Alteryx ETL workflows built</div></div>
+      <div class="stat-tile"><div class="v">~3 min</div><div class="k">full enrollment pipeline run time</div></div>
+      <div class="stat-tile"><div class="v">334</div><div class="k">corrected Honors College headcount</div></div>
+      <div class="stat-tile"><div class="v">4,028</div><div class="k">corrected Pell-eligibility figure</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>The Situation</h2>
+    <p>The Factbook was previously built through undocumented methods left by a prior assistant director, using a fully manual Excel template rebuilt from scratch every semester. Processing enrollment, program, and demographic data meant re-entering and re-checking everything by hand each term — nothing was reusable, and key data sources were siloed and had never been integrated.</p>
+    <p>OPEIR's Director and technical liaison brought me in to rebuild this into something a non-technical analyst could actually own and run themselves.</p>
+  </section>
+
+  <section class="block">
+    <h2>What I Built — Three Attempts to Get the Right Fit</h2>
+    <p>My first instinct was Alteryx: build the ETL logic properly, once, instead of rebuilding an Excel template every semester. It worked technically, but it created a new problem — Alteryx workflows were hard to build and, more importantly, hard for non-technical staff to adjust when reporting definitions changed term to term. A tool only the builder can maintain isn't actually a fix.</p>
+    <p>Second attempt was Jupyter Notebooks — more flexible, but this reintroduced the same core problem from a different angle: it still required someone comfortable editing code, and non-technical staff hit real friction trying to run it (including PATH configuration errors just to execute Python from the command line).</p>
+    <p>The third attempt — Streamlit — is what actually worked. Two web apps, "ENR Merger" and "Enrollment Pipeline," packaged with one-click batch files, gave non-technical staff a real interface: no code, no terminal, just a button. The underlying pipeline still used Alteryx for ETL (enrollment classification, demographics, residency, minors, athletics, program migration) and Power BI with custom DAX for the dashboard suite — Streamlit was the missing front door that made the rest of the system actually usable by the person who'd own it day to day.</p>
+    <p>The Enrollment by Classification workflow was validated directly against official university totals before anything else was built on top of it — establishing trust in the foundation layer first.</p>
+  </section>
+
+  <section class="block">
+    <h2>Errors Caught Before Publication</h2>
+    <div class="bug-card">
+      <span class="b-label">Honors College headcount</span>
+      <h4>A many-to-many join was inflating the count</h4>
+      <p>A join bug was duplicating Honors College students in the output. Fixed via a Join → Unique → Union pattern, correcting the figure to the true count of 334 students.</p>
+    </div>
+    <div class="bug-card">
+      <span class="b-label">Pell-eligibility reporting</span>
+      <h4>Published numbers reflected the wrong metric entirely</h4>
+      <p>The Factbook had been reporting <em>awarded</em> Pell grants where it should have reported <em>eligible</em> students. Corrected to 4,028 — confirmed directly by the technical liaison: "4,028 is correct and what should be shown."</p>
+    </div>
+    <div class="bug-card">
+      <span class="b-label">Residency reporting</span>
+      <h4>A 139-student discrepancy traced to county-code mapping</h4>
+      <p>Diagnosed by mapping FIPS county codes 155–189, reconciling the total to match the official published figure of 11,636.</p>
+    </div>
+    <div class="bug-card">
+      <span class="b-label">Online enrollment</span>
+      <h4>Students were being counted more than once</h4>
+      <p>Diagnosed and fixed an overcount via de-duplication on term and student ID plus modality filters, then rebuilt a bloated 13-page output into 3 clean matrices after stakeholder feedback.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Validated Against Official Totals</h2>
+    <table class="validate">
+      <tr><th>Metric</th><th>Result</th></tr>
+      <tr><td>Enrollment by Classification, Fall 2024</td><td>11,775 ✓</td></tr>
+      <tr><td>Enrollment by Classification, Spring 2025</td><td>10,847 ✓</td></tr>
+      <tr><td>State residency total</td><td>11,636 ✓</td></tr>
+      <tr><td>Honors College headcount (corrected)</td><td>334</td></tr>
+      <tr><td>Pell-eligible students (corrected)</td><td>4,028</td></tr>
+    </table>
+  </section>
+
+  <section class="block">
+    <h2>Honest Limitations</h2>
+    <ul class="limits-list">
+      <li>No hard "before" time baseline exists for the legacy manual process — it was never timed. The efficiency story rests on error-reduction and accessibility evidence (non-technical staff literally couldn't run the old system), not an invented hours-saved percentage. The ~40% development-time reduction from reusable Alteryx macro patterns is a self-estimate, not a measured figure.</li>
+      <li>~20 minor programs still needed manual department/faculty mapping at handoff — the crosswalk wasn't fully complete.</li>
+      <li>Some historical data (2009/2010 graduation cohorts, older degree records) had to be manually copied from prior published Factbooks rather than being pipeline-generated — a gap in true end-to-end automation.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h2>Collaborators</h2>
+    <div class="collab-grid">
+      <div class="collab"><span class="name">Director of OPEIR</span><span class="role">Supervisor — reviewed and approved final Factbook drafts, set formatting standards</span></div>
+      <div class="collab"><span class="name">Research Data Analyst</span><span class="role">Direct technical liaison — provided raw data, clarified reporting definitions, reviewed drafts</span></div>
+      <div class="collab"><span class="name">Apeksha</span><span class="role">OPEIR staff analyst — end user; took ownership of the Streamlit tools post-handoff for recurring enrollment cycles</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Stack</h2>
+    <div class="tool-grid">
+      <span>Alteryx Designer</span><span>Power BI Desktop</span><span>Power Query</span><span>DAX</span>
+      <span>Python (pandas, Plotly)</span><span>Streamlit</span><span>Windows batch scripting</span>
+    </div>
+  </section>
+
+  <footer>
+    <h3>Let's talk about what you're trying to solve.</h3>
+    <p>Looking to translate raw data into actionable revenue strategies? I'd like to hear about it.</p>
+    <div class="foot-ctas">
+      <a class="btn btn-primary mailto-link" href="#">Let's Talk</a>
+      <a class="btn btn-secondary" href="#resume">Download Resume</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var user = 'mustafanalbantli';
+    var domain = 'gmail.com';
+    var address = user + '@' + domain;
+    document.querySelectorAll('.mailto-link').forEach(function (el) {
+      el.setAttribute('href', 'mailto:' + address);
+    });
+  });
+</script>
+</body>
+</html>
