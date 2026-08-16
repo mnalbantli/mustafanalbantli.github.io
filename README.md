@@ -1,0 +1,24 @@
+# Mustafa Nalbantli — Portfolio Site
+
+Static portfolio site showcasing four data analytics / analytics engineering case studies. Built as plain HTML/CSS/JS — no build step, no framework, no dependencies beyond Google Fonts CDN.
+
+## Structure
+
+```
+index.html                      → homepage (hero, proof stats, project cards)
+mean-mug-detail.html            → Mean Mug Growth Analytics (featured project)
+retention-model-detail.html     → Student Early-Warning Retention Model
+student-success-detail.html     → Student Success Analytics Pipeline
+factbook-detail.html            → Factbook Automation
+```
+
+All internal links are relative, so the site works unmodified whether it's served from a domain root (`username.github.io`) or a subpath (`username.github.io/reponame`).
+
+## Known placeholders / open items
+
+- **Resume download button** (`href="#resume"` on every page) — not yet wired to an actual PDF. Needs a resume file added (e.g. `/resume.pdf`) and every `href="#resume"` updated to point to it.
+- **No custom domain configured yet** — deployed to the default GitHub Pages subdomain for now.
+
+## Deployment
+
+Deployed via GitHub Pages from this repo. See repo Settings → Pages for the live configuration.
