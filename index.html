@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mustafa Nalbantli — Analytics Engineer / Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F6F3EC; --ink: #1E1B16; --muted: #625C50; --line: #DCD5C4;
+    --navy: #1F3A5F; --clay: #A65A3B; --clay-dark: #8A4A2F; --gold: #C99A3E;
+    --card: #FBF9F4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: 'IBM Plex Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 28px; }
+
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(246,243,236,0.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; }
+  .nav-name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 17px; }
+  .nav-ctas { display: flex; gap: 10px; align-items: center; }
+  .btn { font-family: 'IBM Plex Sans', sans-serif; font-size: 13.5px; font-weight: 600; padding: 9px 16px; border-radius: 3px; cursor: pointer; white-space: nowrap; transition: transform .12s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--clay); color: #fff; }
+  .btn-primary:hover { background: var(--clay-dark); }
+  .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-secondary:hover { border-color: var(--ink); }
+  @media (max-width: 560px) { .nav-ctas .btn-secondary { display: none; } }
+
+  .hero { padding: 64px 0 40px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); margin-bottom: 20px; }
+  h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 44px; line-height: 1.08; letter-spacing: -0.01em; max-width: 640px; }
+  .hero-sub { font-size: 16px; color: var(--muted); max-width: 480px; margin-top: 18px; line-height: 1.6; }
+  .hero-ctas { display: flex; gap: 12px; align-items: center; margin-top: 30px; flex-wrap: wrap; }
+  .hero-ctas .btn { padding: 13px 22px; font-size: 14.5px; }
+  .micro-copy { font-size: 13.5px; color: var(--muted); margin-top: 14px; font-style: italic; }
+
+  .proof-band { margin-top: 48px; background: var(--ink); border-radius: 6px; display: flex; flex-wrap: wrap; }
+  .proof-tile { flex: 1; min-width: 140px; padding: 22px 20px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .proof-tile:last-child { border-right: none; }
+  .proof-tile .v { font-family: 'JetBrains Mono', monospace; font-size: 24px; color: var(--gold); font-weight: 500; }
+  .proof-tile .k { font-size: 11.5px; color: #B8AF9E; margin-top: 6px; line-height: 1.4; }
+
+  .section-head { margin-top: 72px; margin-bottom: 24px; display: flex; align-items: baseline; justify-content: space-between; }
+  .section-head h2 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; }
+  .section-head .count { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+
+  /* Featured card */
+  .featured {
+    display: block; padding: 32px; margin-bottom: 40px;
+    background: var(--ink); border-radius: 8px; color: #F5F2EA;
+    transition: box-shadow .15s;
+  }
+  .featured:hover { box-shadow: 0 8px 28px rgba(30,27,22,0.18); }
+  .featured-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .featured-label::before { content: '★'; }
+  .featured h3 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; margin-bottom: 10px; }
+  .featured .result-line { font-size: 15px; color: #E7D9C4; font-weight: 500; line-height: 1.5; max-width: 620px; margin-bottom: 14px; }
+  .featured p.desc { font-size: 14px; color: #B8AF9E; line-height: 1.65; max-width: 600px; margin-bottom: 18px; }
+  .featured .tools { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A8577; margin-bottom: 20px; }
+  .featured .mini-stats { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 22px; }
+  .featured .mini-stats .item .v { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--gold); }
+  .featured .mini-stats .item .k { font-size: 10.5px; color: #8A8577; margin-top: 3px; }
+  .featured .arrow { font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--gold); }
+
+  /* Standard project cards */
+  .card {
+    display: block; padding: 26px; margin-bottom: 14px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .card:hover { border-color: var(--navy); box-shadow: 0 4px 16px rgba(30,27,22,0.06); }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+  .card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 10px; display: block; }
+  .card h3 { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; margin-bottom: 6px; }
+  .card .result-line { font-size: 14.5px; color: var(--clay-dark); font-weight: 600; margin-bottom: 10px; }
+  .card p { font-size: 13.5px; color: var(--muted); line-height: 1.6; max-width: 560px; }
+  .card .tools { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8A8577; margin-top: 12px; }
+  .card .arrow { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--navy); white-space: nowrap; }
+
+  footer { padding: 60px 0 80px; border-top: 1px solid var(--line); margin-top: 60px; }
+  footer .foot-cta { text-align: center; }
+  footer h3 { font-family: 'Fraunces', serif; font-size: 24px; margin-bottom: 10px; }
+  footer p { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+  footer .hero-ctas { justify-content: center; }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 32px; }
+    .proof-band { flex-direction: column; }
+    .proof-tile { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .proof-tile:last-child { border-bottom: none; }
+    .featured h3 { font-size: 23px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">Mustafa Nalbantli</div>
+    <div class="nav-ctas">
+      <a class="btn btn-secondary" href="#resume">Download Resume</a>
+      <a class="btn btn-primary mailto-link" href="#">Let's Talk</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Analytics Engineer / Data Analyst — Retail &amp; Consumer Analytics</div>
+    <h1>I turn retail and behavioral data into decisions worth acting on.</h1>
+    <p class="hero-sub">Four end-to-end case studies — from a dbt-modeled retail analytics stack to a 0.917 ROC-AUC dropout prediction model — built with the same rigor I'd bring to your team.</p>
+
+    <div class="hero-ctas">
+      <a class="btn btn-primary mailto-link" href="#">Let's Talk</a>
+      <a class="btn btn-secondary" href="#resume">Download Resume</a>
+    </div>
+    <p class="micro-copy">Looking to translate raw data into actionable revenue strategies? Let's talk.</p>
+
+    <div class="proof-band">
+      <div class="proof-tile"><div class="v">0.917</div><div class="k">ROC-AUC, dropout model</div></div>
+      <div class="proof-tile"><div class="v">153K+</div><div class="k">records unified</div></div>
+      <div class="proof-tile"><div class="v">18K+</div><div class="k">students analyzed</div></div>
+      <div class="proof-tile"><div class="v">04</div><div class="k">end-to-end case studies</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Case Studies</h2>
+      <div class="count">04 projects</div>
+    </div>
+
+    <a class="featured" href="mean-mug-detail.html">
+      <div class="featured-label">Featured Case Study</div>
+      <h3>Mean Mug Growth Analytics</h3>
+      <div class="result-line">A full hybrid-cloud analytics stack, built to answer one question: can this business trust its own data enough to spend on it?</div>
+      <p class="desc">Self-directed case study for a simulated 3-location coffee shop chain — dbt star schema, RFM segmentation, LTV modeling, and a full statistical significance testing workflow (Welch's t-test, Glass's delta) on campaign lift.</p>
+      <div class="mini-stats">
+        <div class="item"><div class="v">30</div><div class="k">dbt models, 17 tests</div></div>
+        <div class="item"><div class="v">$113.91</div><div class="k">avg. customer LTV</div></div>
+        <div class="item"><div class="v">2.6x</div><div class="k">seasonal buyer frequency</div></div>
+      </div>
+      <div class="tools">dbt · DuckDB · BigQuery · Power BI · Python · SQL</div>
+      <div class="arrow">View full case study →</div>
+    </a>
+
+    <a class="card" href="retention-model-detail.html">
+      <div class="card-top">
+        <div>
+          <span class="card-label">ML / Classification · scikit-learn</span>
+          <h3>Student Early-Warning Retention Model</h3>
+          <div class="result-line">0.917 ROC-AUC dropout risk model — caught its own target-leakage bug before shipping</div>
+          <p>Binary classification model built for UTC's retention office, identifying at-risk students from early, actionable signals only.</p>
+          <div class="tools">scikit-learn · pandas · scipy.stats · rapidfuzz</div>
+        </div>
+        <div class="arrow">View case study →</div>
+      </div>
+    </a>
+
+    <a class="card" href="student-success-detail.html">
+      <div class="card-top">
+        <div>
+          <span class="card-label">Data Pipeline · Python</span>
+          <h3>Student Success Analytics Pipeline</h3>
+          <div class="result-line">Unified 153K+ records into one pipeline, catching two errors that were distorting institutional retention numbers</div>
+          <p>Retention, stop-out, and graduation outcomes analysis across 18,557 students (2019–2024) for OPEIR.</p>
+          <div class="tools">Python · pandas · matplotlib</div>
+        </div>
+        <div class="arrow">View case study →</div>
+      </div>
+    </a>
+
+    <a class="card" href="factbook-detail.html">
+      <div class="card-top">
+        <div>
+          <span class="card-label">Automation · Alteryx / Power BI / Streamlit</span>
+          <h3>Factbook Automation</h3>
+          <div class="result-line">Replaced a fully manual, semester-by-semester Excel process — after two earlier tool choices didn't hold up</div>
+          <p>Rebuilt UTC's institutional Factbook reporting pipeline and handed off working tooling to non-technical staff.</p>
+          <div class="tools">Alteryx · Power BI · DAX · Python · Streamlit</div>
+        </div>
+        <div class="arrow">View case study →</div>
+      </div>
+    </a>
+  </section>
+
+  <footer>
+    <div class="foot-cta">
+      <h3>Let's talk about what you're trying to solve.</h3>
+      <p>Looking to translate raw data into actionable revenue strategies? I'd like to hear about it.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary mailto-link" href="#">Let's Talk</a>
+        <a class="btn btn-secondary" href="#resume">Download Resume</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Scraper-resistant mailto: email is assembled at runtime, not present as plaintext in the HTML source.
+  document.addEventListener('DOMContentLoaded', function () {
+    var user = 'mustafanalbantli';
+    var domain = 'gmail.com';
+    var address = user + '@' + domain;
+    document.querySelectorAll('.mailto-link').forEach(function (el) {
+      el.setAttribute('href', 'mailto:' + address);
+    });
+  });
+</script>
+
+</body>
+</html>
