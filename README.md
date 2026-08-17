@@ -10,13 +10,13 @@ mean-mug-detail.html            → Mean Mug Growth Analytics (featured project)
 retention-model-detail.html     → Student Early-Warning Retention Model
 student-success-detail.html     → Student Success Analytics Pipeline
 factbook-detail.html            → Factbook Automation
+resume.pdf                      → downloadable resume, linked from every "Download Resume" button
 ```
 
 All internal links are relative, so the site works unmodified whether it's served from a domain root (`username.github.io`) or a subpath (`username.github.io/reponame`).
 
 ## Known placeholders / open items
 
-- **Resume download button** (`href="#resume"` on every page) — not yet wired to an actual PDF. Needs a resume file added (e.g. `/resume.pdf`) and every `href="#resume"` updated to point to it.
 - **No custom domain configured yet** — deployed to the default GitHub Pages subdomain for now.
 
 ## Deployment
